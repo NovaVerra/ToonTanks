@@ -16,6 +16,22 @@
 		"directory": "F:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
+		"file": "F:\\GameDev\\ToonTanks\\Source\\ToonTanks\\Tank.cpp",
+		"arguments": [
+			"G:\\Microsoft Visual Studio\\Visual Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\GameDev\\ToonTanks\\.vscode\\compileCommands_ToonTanks\\ToonTanks.1.rsp"
+		],
+		"directory": "F:\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "F:\\GameDev\\ToonTanks\\Source\\ToonTanks\\Tank.h",
+		"arguments": [
+			"G:\\Microsoft Visual Studio\\Visual Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@F:\\GameDev\\ToonTanks\\.vscode\\compileCommands_ToonTanks\\ToonTanks.1.rsp"
+		],
+		"directory": "F:\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
 		"file": "F:\\GameDev\\ToonTanks\\Source\\ToonTanks\\ToonTanks.Build.cs",
 		"arguments": [
 			"G:\\Microsoft Visual Studio\\Visual Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
