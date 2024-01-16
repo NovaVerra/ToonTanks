@@ -27,12 +27,17 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float	TurnRate;
 
+	APlayerController*	PlayerController;
+
+protected:
+	virtual void	BeginPlay() override;
+
 public:
 	ATank();
+	virtual void	Tick(float DeltaTime) override;
 
-	void	Move(float Value);
-	void	Turn(float Value);
+	void	MoveTank(float Value);
+	void	TurnTank(float Value);
 
-	// Called to bind functionality to input
 	virtual void	SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 };

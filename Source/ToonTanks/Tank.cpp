@@ -5,7 +5,6 @@
 #include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
 
-
 ATank::ATank()
 {
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
@@ -15,14 +14,48 @@ ATank::ATank()
 	CameraComponent->SetupAttachment(SpringArmComponent);
 }
 
-void ATank::Move(float Value)
+// Called when the game starts or when spawned
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+
+	PlayerController = Cast<APlayerController>(GetController());
+	DrawDebugSphere(
+		GetWorld(),
+		GetActorLocation() + FVector(0.f, 0.f, 200.f),
+		10.f,
+		12,
+		FColor::Red,
+		true,
+		30.f
+	);
+}
+
+// Called every frame
+void ATank::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	FHitResult	HitResult;
+	if (PlayerController)
+	{
+		PlayerController->GetHitResultUnderCursor(
+			ECollisionChannel::ECC_Visibility,
+			false,
+			HitResult
+		);
+	}
+	RotateTurret(HitResult.ImpactPoint);
+}
+
+void ATank::MoveTank(float Value)
 {
 	FVector	DeltaLocation = FVector::ZeroVector;
 	DeltaLocation.X = Value * UGameplayStatics::GetWorldDeltaSeconds(this) * Speed;
 	AddActorLocalOffset(DeltaLocation, true);
 }
 
-void ATank::Turn(float Value)
+void ATank::TurnTank(float Value)
 {
 	FRotator	DeltaLocation = FRotator::ZeroRotator;
 	DeltaLocation.Yaw = Value * UGameplayStatics::GetWorldDeltaSeconds(this) * TurnRate;
@@ -34,6 +67,6 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
-	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
+	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::MoveTank);
+	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::TurnTank);
 }
