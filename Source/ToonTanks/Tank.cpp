@@ -20,15 +20,6 @@ void ATank::BeginPlay()
 	Super::BeginPlay();
 
 	PlayerController = Cast<APlayerController>(GetController());
-	DrawDebugSphere(
-		GetWorld(),
-		GetActorLocation() + FVector(0.f, 0.f, 200.f),
-		10.f,
-		12,
-		FColor::Red,
-		true,
-		30.f
-	);
 }
 
 // Called every frame
@@ -43,6 +34,15 @@ void ATank::Tick(float DeltaTime)
 			ECollisionChannel::ECC_Visibility,
 			false,
 			HitResult
+		);
+		DrawDebugSphere(
+			GetWorld(),
+			HitResult.ImpactPoint,
+			25.f,
+			12,
+			FColor::Red,
+			false,
+			-1.0f
 		);
 	}
 	RotateTurret(HitResult.ImpactPoint);
@@ -69,4 +69,5 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::MoveTank);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::TurnTank);
+	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ATank::Fire);
 }
