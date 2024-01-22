@@ -40,6 +40,7 @@ public:
 	void	TurnTank(float Value);
 	void	HandleDestruction();
 	APlayerController* GetTankPlayerController() const;
+	bool	bAlive = true;
 
 	virtual void	SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 };
