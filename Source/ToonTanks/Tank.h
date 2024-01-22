@@ -27,7 +27,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float	TurnRate;
 
-	APlayerController*	PlayerController;
+	APlayerController*	TankPlayerController;
 
 protected:
 	virtual void	BeginPlay() override;
@@ -38,6 +38,8 @@ public:
 
 	void	MoveTank(float Value);
 	void	TurnTank(float Value);
+	void	HandleDestruction();
+	APlayerController* GetTankPlayerController() const;
 
 	virtual void	SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 };

@@ -19,7 +19,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PlayerController = Cast<APlayerController>(GetController());
+	TankPlayerController = Cast<APlayerController>(GetController());
 }
 
 // Called every frame
@@ -28,9 +28,9 @@ void ATank::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	FHitResult	HitResult;
-	if (PlayerController)
+	if (TankPlayerController)
 	{
-		PlayerController->GetHitResultUnderCursor(
+		TankPlayerController->GetHitResultUnderCursor(
 			ECollisionChannel::ECC_Visibility,
 			false,
 			HitResult
@@ -70,4 +70,16 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::MoveTank);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::TurnTank);
 	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ATank::Fire);
+}
+
+void ATank::HandleDestruction()
+{
+	Super::HandleDestruction();
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
+
+APlayerController* ATank::GetTankPlayerController() const
+{
+	return TankPlayerController;
 }

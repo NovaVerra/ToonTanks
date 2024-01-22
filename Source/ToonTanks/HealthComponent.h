@@ -24,9 +24,10 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	UFUNCTION()
-	void DamageTaken(AActor* DamangedActor, float Damage, const UDamageType* DamangeType, AController* Instigator, AActor* DamageCauser);
+	void DamageTaken(AActor* DamagedActor, float Damage, const UDamageType* DamangeType, AController* Instigator, AActor* DamageCauser);
 private:
 	UPROPERTY(EditAnywhere)
 	float	MaxHealth = 100.f;
 	float	Health = 0.f;
+	class AToonTanksGameMode* ToonTanksGameMode;
 };

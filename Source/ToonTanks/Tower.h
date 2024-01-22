@@ -29,4 +29,5 @@ public:
 	virtual void	Tick(float DeltaTime) override;
 	void			CheckFireCondition();
 	bool			InFireRange();
+	void			HandleDestruction();
 };
