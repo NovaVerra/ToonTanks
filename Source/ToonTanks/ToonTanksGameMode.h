@@ -16,10 +16,13 @@ class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
 
 private:
 	class ATank* Tank;
+	class AToonTanksPlayerController* ToonTanksPlayerController;
+	float StartDelay = 3.f;
 
 protected:
 	virtual void BeginPlay() override;
 
 public:
 	void ActorDied(AActor* DeadActor);
+	void HandleGameStart();
 };
